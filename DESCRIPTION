@@ -1,0 +1,25 @@
+Package: csound
+Type: Package
+Title: Accessing Csound functionality through R
+Version: 0.1-0
+Date: 2011-09-06
+Author: Ethan Brown
+Maintainer: Ethan Brown <ethancbrown+playitbyr@gmail.com>
+Depends:
+    R (>= 2.12.0),
+    rdyncall
+Description: Provides some basic access in an R session to
+    Csound (http://www.csounds.com), a powerful free and
+    open-source software synthesizer. The package
+    functionality is largely geared towards supporting the
+    needs of the playitbyr package and is not particularly
+    mature on its own, but it certainly can be used without
+    knowing anything about playitbyr.
+SystemRequirements: NA
+URL: NA
+License: NA
+LazyLoad: NA
+Collate:
+    'aaa.R'
+    'APIwrappers.R'
+    'setCsoundLibrary.R'
