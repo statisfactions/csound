@@ -1,3 +1,5 @@
+##' @importFrom rdyncall dynfind
+
 .onLoad <- function(libname, pkgname) {
   if(is.null(getOption("csoundlibrary")))
     csndlib <- dynfind(c("csound64",

@@ -30,7 +30,7 @@
 ##' Other functions in this package provide safer interfaces to
 ##' Csound, though this is the most direct interaction
 ##' 
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 ##'
 ##' @return \code{csoundCreate} returns a Csound instance that is an
 ##' argument to most of the other API functions.
@@ -47,7 +47,7 @@ csoundCreate <- function() {
 }
 
 
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 ##' @param args A character vector of command-line arguments to pass
 ##' to csound. See
 ##' \href{http://www.csounds.com/manual/html/CommandFlagsCategory.html}{The
@@ -65,7 +65,7 @@ csoundCompile <- function(csInstance, args) {
   } else invisible(NULL)
 }
 
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 ##' 
 ##' @export
 csoundCleanup <- function(csInstance) {
@@ -77,7 +77,7 @@ csoundCleanup <- function(csInstance) {
   } else invisible(NULL)
 }
 
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 ##' @export
 ##' 
 csoundDestroy <- function(csInstance) {
@@ -86,35 +86,10 @@ csoundDestroy <- function(csInstance) {
   invisible(NULL)
 }
 
-##' @rdname APIwrappers
-csoundGetKr <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetKr")
-  return(.dyncall(symptr, "*<CSOUND>f", csInstance))
-}
 
-##' @rdname APIwrappers
-csoundGetKsmps <- function(csInstance) {
- symptr <- .dynsym(getCsoundLibrary(), "csoundGetKsmps")
- return(.dyncall(symptr, "*<CSOUND>f", csInstance))
-}
-
-##' @rdname APIwrappers
-csoundGetSr <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetSr")
-  return(.dyncall(symptr, "*<CSOUND>f", csInstance))
-}
-
-##' @rdname APIwrappers
-##' 
-##' @export
-csoundGetVersion <- function() {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetSr")
-  ## Version number appears in 1000s, so divide
- return(.dyncall(symptr, ")i")/1000)
-}
 
 ##' @export
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 csoundPerform <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundPerform")
   result <- .dyncall(symptr, "*<CSOUND>)i", csInstance)
@@ -123,16 +98,16 @@ csoundPerform <- function(csInstance) {
 }
 
 ##' @export
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 csoundPerformKsmps <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundPerformKsmps")
   finished <- .dyncall(symptr, "*<CSOUND>)i", csInstance)
-  returns(finished) # logical indicating whether score is complete or
-                    # not.
+  return(finished) # logical indicating whether score is complete or
+                   # not.
 }
 
 ##' @export
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 csoundPreCompile <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundPreCompile")
   .dyncall(symptr, "*<CSOUND>)v", csInstance)
@@ -140,9 +115,15 @@ csoundPreCompile <- function(csInstance) {
 }
 
 ##' @export  
-##' @rdname APIwrappers
+##' @rdname PerformanceAPI
 ##' 
-##' @param type The type of score event; only \href{http://www.csounds.com/manual/html/a.html}{a}, \href{http://www.csounds.com/manual/html/i.html}{i}, \href{http://www.csounds.com/manual/html/q.html}{q}, \href{http://www.csounds.com/manual/html/f.html}{f}, and \href{http://www.csounds.com/manual/html/e.html}{e} are supported in the API:
+##' @param type The type of score event; only
+##' \href{http://www.csounds.com/manual/html/a.html}{a},
+##' \href{http://www.csounds.com/manual/html/i.html}{i},
+##' \href{http://www.csounds.com/manual/html/q.html}{q},
+##' \href{http://www.csounds.com/manual/html/f.html}{f}, and
+##' \href{http://www.csounds.com/manual/html/e.html}{e} are supported
+##' in the API:
 ##' 
 ##' \sQuote{a}: Advance score time by a specified amount.
 ##' \sQuote{i}: Makes an instrument active at a specific time and for a certain duration 
@@ -151,6 +132,10 @@ csoundPreCompile <- function(csInstance) {
 ##' \sQuote{e}: Marks the end of the last section of the score. (In
 ##' practice I've had trouble making \sQuote{e} statements work as
 ##' I've expected they would.)
+##'
+##' @param pfields The pfields (Parameter Fields) for the given score
+##' event. See the Csound manual links for parameter \code{type} for
+##' more information on the parameters that each of these objects take
 csoundScoreEvent <- function(csInstance,
                              type=c('a', 'i', 'q', 'f',  'e'),
                              pfields) {
@@ -176,12 +161,5 @@ csoundScoreEvent <- function(csInstance,
 }
 
 
-##' @rdname APIwrappers
-getCsoundError <- function(i) {
-  csoundmessages <- c("Unspecified failure.",
-                      "Failed during initialization.",
-                      "Failed during performance.",
-                      "Failed to allocate requested memory.",
-                      "Termination requested by SIGINT or SIGTERM.")
-  (csoundmessages[-i])
-}
+
+

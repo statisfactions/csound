@@ -16,6 +16,12 @@
 ##' Hopefully these options won't need to be accessed by most users,
 ##' but they are provided as a backup.
 ##'
+##' @return \code{getCsoundLibrary()} returns a pointer to the Csound
+##' library, with the path to the library passed as an attribute.
+##'
+##' \code{csoundGetVersion()} returns the version of Csound that is
+##' linked to.
+##'
 ##' @rdname setCsoundLibrary
 ##' @export
 getCsoundLibrary <- function() {
@@ -40,16 +46,22 @@ setCsoundLibrary <- function(path) {
         "checking version number...\n\n")
     versymbol <- .dynsym(csndlib, "csoundGetVersion")
     if(is.null(versymbol))
-      stop("'", path, "' is detected as a shared library, but it \n",
-           "is not the correct one for Csound--the attempt to get function \n",
+      stop("'", path, "' is detected as a shared library, but it\n",
+           "is not the correct one for Csound--the attempt to access function\n",
            "csoundGetVersion() from the library failed.")
-    ver <- .dyncall(versymbol, ")i")/1000
+    ver <- csoundGetVersion()
 
     options(csoundlibrary=csndlib)
     cat(paste("Successfully set option for Csound", ver, "\n"))
     
   }
 }
-    
-  
 
+##' @rdname setCsoundLibrary
+##' 
+##' @export
+csoundGetVersion <- function() {
+  symptr <- .dynsym(getCsoundLibrary(), "csoundGetSr")
+  ## Version number appears in 1000s, so divide
+ return(.dyncall(symptr, ")i")/1000)
+}

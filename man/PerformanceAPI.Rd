@@ -3,15 +3,10 @@
 \alias{csoundCompile}
 \alias{csoundCreate}
 \alias{csoundDestroy}
-\alias{csoundGetKr}
-\alias{csoundGetKsmps}
-\alias{csoundGetSr}
-\alias{csoundGetVersion}
 \alias{csoundPerform}
 \alias{csoundPerformKsmps}
 \alias{csoundPreCompile}
 \alias{csoundScoreEvent}
-\alias{getCsoundError}
 \title{Low-level Csound API functions}
 \usage{
   csoundCreate()
@@ -22,14 +17,6 @@
 
   csoundDestroy(csInstance)
 
-  csoundGetKr(csInstance)
-
-  csoundGetKsmps(csInstance)
-
-  csoundGetSr(csInstance)
-
-  csoundGetVersion()
-
   csoundPerform(csInstance)
 
   csoundPerformKsmps(csInstance)
@@ -38,8 +25,6 @@
 
   csoundScoreEvent(csInstance, type = c("a", "i", "q", "f",
   "e"), pfields)
-
-  getCsoundError(i)
 }
 \arguments{
   \item{csInstance}{an instance of Csound created by
@@ -67,6 +52,11 @@
   end of the last section of the score. (In practice I've
   had trouble making \sQuote{e} statements work as I've
   expected they would.)}
+
+  \item{pfields}{The pfields (Parameter Fields) for the
+  given score event. See the Csound manual links for
+  parameter \code{type} for more information on the
+  parameters that each of these objects take}
 }
 \value{
   \code{csoundCreate} returns a Csound instance that is an

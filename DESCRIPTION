@@ -15,11 +15,19 @@ Description: Provides some basic access in an R session to
     needs of the playitbyr package and is not particularly
     mature on its own, but it certainly can be used without
     knowing anything about playitbyr.
-SystemRequirements: NA
-URL: NA
-License: NA
-LazyLoad: NA
+SystemRequirements: A valid copy of the Csound library must
+    present. Csound can be downloaded from
+    http://www.csounds.com. The library is included in the
+    Windows and Mac OS X binaries; binary Linux
+    distributions often package the library separately from
+    the executible file, so for instance on Debian and
+    Ubuntu you would need the "libcsound64-dev" package.
+URL: http://playitbyr.r-forge.r-project.org
+License: GPL (>=2)
+LazyLoad: Yes
 Collate:
     'aaa.R'
-    'APIwrappers.R'
     'setCsoundLibrary.R'
+    'getCsoundError.R'
+    'getHeaderInfo.R'
+    'PerformanceAPI.R'
