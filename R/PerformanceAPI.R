@@ -141,6 +141,7 @@ csoundScoreEvent <- function(csInstance,
                              pfields) {
   type <- match.arg(type)
 
+  #pfieldsFloat <- as.floatraw(pfields)
   ## Replace with ASCII character code
   ## (There may be a more logical way to do this)
   typeCharCode <- switch(type,
@@ -150,8 +151,9 @@ csoundScoreEvent <- function(csInstance,
                          f = 102L,
                          e = 101L)
   
+
   symptr <- .dynsym(getCsoundLibrary(), "csoundScoreEvent")
-  result <- .dyncall(symptr, "*<CSOUND>)i", csInstance,
+  result <- .dyncall(symptr, "*<CSOUND>c*dj)i", csInstance,
                      typeCharCode, pfields, length(pfields))
                         
   if(result != 0) {

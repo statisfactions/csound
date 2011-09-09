@@ -31,3 +31,4 @@ Collate:
     'getCsoundError.R'
     'getHeaderInfo.R'
     'PerformanceAPI.R'
+    'createPerformance.R'
