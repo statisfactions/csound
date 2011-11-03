@@ -61,7 +61,7 @@ setCsoundLibrary <- function(path) {
 ##' 
 ##' @export
 csoundGetVersion <- function() {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetSr")
+  symptr <- .dynsym(getCsoundLibrary(), "csoundGetVersion")
   ## Version number appears in 1000s, so divide
  return(.dyncall(symptr, ")i")/1000)
 }
