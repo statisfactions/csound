@@ -115,4 +115,3 @@ cleanupCrash <- function() {
      rm(.lastInstance, pos = ".GlobalEnv")
    }
 }
-  
