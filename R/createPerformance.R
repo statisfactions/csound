@@ -54,12 +54,12 @@ createPerformance <- function(orcfile,
                               flags = c("-odac", "-g"),
                               finishPerformance = TRUE) {
   ## Preliminaries
-  csinst <- csoundCreate()
+  csinst <- .csoundCreate()
   assign(".lastInstance", csinst, pos=".GlobalEnv")
-  csoundPreCompile(csinst)
+  .csoundPreCompile(csinst)
 
   ## Compile score & get ready for performance
-  csoundCompile(csinst, c(orcfile, scorefile, flags))
+  .csoundCompile(csinst, c(orcfile, scorefile, flags))
 
   performScore(csinst, i, f)
 
@@ -75,7 +75,7 @@ performScore <- function(csInstance, i = NULL, f = NULL) {
   ## send the score events for each row and calculates the length 
   maxends <- sapply(i, function(x) {
     lapply(1:nrow(x), function(y) {
-      csoundScoreEvent(csInstance, "i", x[y,])
+      .csoundScoreEvent(csInstance, "i", x[y,])
       return()
     })
     maxend <- max(rowSums(x[,2:3])) #p2 is start, p3 dur, so their sum
@@ -89,11 +89,11 @@ performScore <- function(csInstance, i = NULL, f = NULL) {
   
   ## Similarly, send any f events
   lapply(f, function(x) {
-    csoundScoreEvent(csInstance, "f", x)
+    .csoundScoreEvent(csInstance, "f", x)
   })
 
   ## Perform!
-  replicate(totalKsmps, csoundPerformKsmps(csInstance))
+  replicate(totalKsmps, .csoundPerformKsmps(csInstance))
 
   invisible(NULL)
 }
@@ -101,8 +101,8 @@ performScore <- function(csInstance, i = NULL, f = NULL) {
 ##' @rdname createPerformance
 ##' @export
 finishPerformance <- function(csInstance) {
-  csoundCleanup(csInstance)
-  csoundDestroy(csInstance)
+  .csoundCleanup(csInstance)
+  .csoundDestroy(csInstance)
   rm(.lastInstance, pos = ".GlobalEnv")
   return(NULL)
 }

@@ -37,45 +37,45 @@
 ##' \code{getHeaderInfo()} simply returns the defaults.
 ##' 
 ##' @rdname getHeaderInfo
-##' @param csInstance An instance of Csound, created by \code{\link{csoundCreate}}.
+##' @param csInstance An instance of Csound, created by \code{\link{.csoundCreate}}.
 ##' @export
 getHeaderInfo <- function(csInstance) {
-  list(sr=csoundGetSr(csInstance),
-       ksmps=csoundGetKsmps(csInstance),
-       kr=csoundGetKr(csInstance),
-       x0dbfs=csoundGet0dBFS(csInstance),
-       nchnls=csoundGetNchnls(csInstance))
+  list(sr=.csoundGetSr(csInstance),
+       ksmps=.csoundGetKsmps(csInstance),
+       kr=.csoundGetKr(csInstance),
+       x0dbfs=.csoundGet0dBFS(csInstance),
+       nchnls=.csoundGetNchnls(csInstance))
 }
        
 
-csoundGetKr <- function(csInstance) {
+.csoundGetKr <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundGetKr")
   return(.dyncall(symptr, "*<CSOUND>)f", csInstance))
 }
 
-csoundGetKsmps <- function(csInstance) {
+.csoundGetKsmps <- function(csInstance) {
  symptr <- .dynsym(getCsoundLibrary(), "csoundGetKsmps")
  return(.dyncall(symptr, "*<CSOUND>)i", csInstance))
 }
 
 
-csoundGetSr <- function(csInstance) {
+.csoundGetSr <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundGetSr")
   return(.dyncall(symptr, "*<CSOUND>)f", csInstance))
 }
 
 
-csoundGetSampleSize <- function(csInstance) {
+.csoundGetSampleSize <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundGetSampleSize")
   return(.dyncall(symptr, "*<CSOUND>)i", csInstance))
 }
 
-csoundGetNchnls <- function(csInstance) {
+.csoundGetNchnls <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundGetNchnls")
   return(.dyncall(symptr, "*<CSOUND>)i", csInstance))
 }
 
-csoundGet0dBFS <- function(csInstance) {
+.csoundGet0dBFS <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundGet0dBFS")
   return(.dyncall(symptr, "*<CSOUND>)f", csInstance))
 }

@@ -19,7 +19,7 @@
 ##' @return \code{getCsoundLibrary()} returns a pointer to the Csound
 ##' library, with the path to the library passed as an attribute.
 ##'
-##' \code{csoundGetVersion()} returns the version of Csound that is
+##' \code{.csoundGetVersion()} returns the version of Csound that is
 ##' linked to.
 ##'
 ##' @rdname setCsoundLibrary
@@ -49,7 +49,7 @@ setCsoundLibrary <- function(path) {
       stop("'", path, "' is detected as a shared library, but it\n",
            "is not the correct one for Csound--the attempt to access function\n",
            "csoundGetVersion() from the library failed.")
-    ver <- csoundGetVersion()
+    ver <- .csoundGetVersion()
 
     options(csoundlibrary=csndlib)
     cat(paste("Successfully set option for Csound", ver, "\n"))
@@ -60,7 +60,7 @@ setCsoundLibrary <- function(path) {
 ##' @rdname setCsoundLibrary
 ##' 
 ##' @export
-csoundGetVersion <- function() {
+.csoundGetVersion <- function() {
   symptr <- .dynsym(getCsoundLibrary(), "csoundGetVersion")
   ## Version number appears in 1000s, so divide
  return(.dyncall(symptr, ")i")/1000)

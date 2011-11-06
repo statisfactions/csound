@@ -4,8 +4,8 @@ require(testthat)
 context("headerinfo")
 
 ## Set up
-csinst <- csoundCreate()
-csoundPreCompile(csinst)
+csinst <- .csoundCreate()
+.csoundPreCompile(csinst)
 tmporc <- paste(tempfile(), "orc", sep = ".")
 tmpout <- tempfile()
 samphead <- "sr = 16000
@@ -15,7 +15,7 @@ samphead <- "sr = 16000
 	instr 1
 	endin"
 write(samphead, tmporc)
-csoundCompile(csinst, c(tmporc, paste("-o", tmpout, sep ="")))
+.csoundCompile(csinst, c(tmporc, paste("-o", tmpout, sep ="")))
 
 test_that("Header info is correctly read from csound", {
   res <- getHeaderInfo(csinst)
@@ -29,6 +29,6 @@ test_that("Header info is correctly read from csound", {
 })
 
 ## Finish up
-csoundCleanup(csinst)
-csoundDestroy(csinst)
+.csoundCleanup(csinst)
+.csoundDestroy(csinst)
 unlink(tmpout)

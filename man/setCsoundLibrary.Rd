@@ -1,15 +1,11 @@
 \name{getCsoundLibrary}
-\alias{csoundGetVersion}
+\alias{.csoundGetVersion}
 \alias{getCsoundLibrary}
 \alias{setCsoundLibrary}
 \title{Get and set the Csound shared library for accessing Csound's
 functionality.}
 \usage{
-  getCsoundLibrary()
-
   setCsoundLibrary(path)
-
-  csoundGetVersion()
 }
 \arguments{
   \item{path}{A character string containing the path to the
@@ -20,7 +16,7 @@ functionality.}
   library, with the path to the library passed as an
   attribute.
 
-  \code{csoundGetVersion()} returns the version of Csound
+  \code{.csoundGetVersion()} returns the version of Csound
   that is linked to.
 }
 \description{

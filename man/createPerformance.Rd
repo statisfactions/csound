@@ -12,8 +12,6 @@
   performScore(csInstance, i = NULL, f = NULL)
 
   finishPerformance(csInstance)
-
-  cleanupCrash()
 }
 \arguments{
   \item{orcfile}{The path of the orchestra file to be used

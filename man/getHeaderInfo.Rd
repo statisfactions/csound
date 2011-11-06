@@ -6,7 +6,7 @@
 }
 \arguments{
   \item{csInstance}{An instance of Csound, created by
-  \code{\link{csoundCreate}}.}
+  \code{\link{.csoundCreate}}.}
 }
 \value{
   \code{getHeaderInfo()} returns a list with the following
