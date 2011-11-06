@@ -14,7 +14,7 @@
 ##' If left open, one can use the object returned by
 ##' \code{createPerformance()} to control Csound and subsequently add
 ##' more control data which Csound then performs immediately with
-##' \code{performScore()}. You can then finish up the performance and
+##' \code{performScoreRealTime()}. You can then finish up the performance and
 ##' close Csound with \code{finishPerformance()}.
 ##'
 ##' If you encounter an error and cannot run
@@ -23,12 +23,6 @@
 ##' 
 ##' @export
 ##' @rdname createPerformance
-##' @param orcfile The path of the orchestra file to be used for the
-##' performance
-##' @param scorefile The path of the score file, if any, to be used
-##' for the performance. The whole purpose of this function is to feed
-##' the score statements to Csound and bypass the need for score
-##' files, but this option is provided in any case.
 ##' @param i A list of \code{matrix} objects. Each \code{matrix} is
 ##' the instructions for a single instrument. Each row of the
 ##' \code{matrix} is an \code{i} statement, which instructs Csound to
@@ -37,32 +31,60 @@
 ##' interpreted in the order of the columns of the \code{matrix}.
 ##' @param f A list of numeric vectors; these create the function
 ##' tables Csound uses for oscillators and various other uses.
-##' @param flags A character vector of extra command-line flags to
-##' pass to Csound upon compilation of the orchestra. See
-##' \href{http://www.csounds.com/manual/html/CommandFlagsCategory.html}{The
-##' Csound Manual's page on the Csound command-line options}.
+##' @param orcfile The path of the orchestra file to be used for the
+##' performance
+##' @param scorefile The path of the score file, if any, to be used
+##' for the performance. The whole purpose of this function is to feed
+##' the score statements to Csound and bypass the need for score
+##' files, but this option is provided in any case.
+##' @param out String representing where to send output sound; the
+##' default, \code{"dac"}, indicates to send it your computer's sound
+##' output. If you want to render a file, enter the path to the (WAV)
+##' file you want.
+##' @param realTime Indicates whether the performance is to be
+##' rendered in real time. If you are rendering to a file, you
+##' probably want this as \code{FALSE}, since it can render a whole
+##' lot faster than real-time to file.
 ##' @param finishPerformance Should the performance be closed after completing
 ##' the score? If \preformatted{TRUE}, the default, cleans up and
 ##' closes Csound. If \preformatted{FALSE}, returns a pointer to a
 ##' Csound instance that can be used to continue the performance or
 ##' eventually close it.
+##' @param suppressDisplays Csound by default pops up with annoying
+##' widgets. This alloys you to suppress them.
+##' @param moreflags A character vector of extra command-line flags to
+##' pass to Csound upon compilation of the orchestra. See
+##' \href{http://www.csounds.com/manual/html/CommandFlagsCategory.html}{The
+##' Csound Manual's page on the Csound command-line options}.
 ##' @param csInstance An instance of Csound that can be used to
 ##' continue or close the current performance.
-createPerformance <- function(orcfile,
+createPerformance <- function(i = NULL, f = NULL,
+                              orcfile,
                               scorefile=NULL,
-                              i = NULL,
-                              f = NULL,
-                              flags = c("-odac", "-g"),
-                              finishPerformance = TRUE) {
+                              out = "dac",
+                              realTime = (out == "dac"),
+                              finishPerformance = TRUE,
+                              suppressDisplays = TRUE,
+                              moreflags = NULL) {
   ## Preliminaries
+  flags <- c(paste("-o", out, sep = ""), "-d"[suppressDisplays], moreflags)
   csinst <- .csoundCreate()
   assign(".lastInstance", csinst, pos=".GlobalEnv")
   .csoundPreCompile(csinst)
 
+  ## Create score file for non-real-time performances
+  if(!realTime & is.null(scorefile)) {
+    scorefile <- writeCsoundScore(i, f)
+    finishPerformance <- TRUE
+  }
+  
   ## Compile score & get ready for performance
   .csoundCompile(csinst, c(orcfile, scorefile, flags))
 
-  performScore(csinst, i, f)
+  if(realTime) {
+      performScoreRealTime(csinst, i, f)
+    } else .csoundPerform(csinst)
+
 
   if(finishPerformance) {
     invisible(finishPerformance(csinst))
@@ -71,7 +93,7 @@ createPerformance <- function(orcfile,
 
 ##' @rdname createPerformance
 ##' @export
-performScore <- function(csInstance, i = NULL, f = NULL) {
+performScoreRealTime <- function(csInstance, i = NULL, f = NULL) {
   ## For each matrix in i,
   ## send the score events for each row and calculates the length 
   maxends <- sapply(i, function(x) {

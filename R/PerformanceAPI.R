@@ -162,6 +162,11 @@
   
 }
 
-
-
-
+##' @export
+.csoundPerform <- function(csInstance) {
+  symptr <- .dynsym(getCsoundLibrary(), "csoundPerform")
+  result <- .dyncall(symptr, "*<CSOUND>)i", csInstance)
+  if(result < 0) {
+    stop(getCsoundError(result))
+  } else invisible(NULL)
+}

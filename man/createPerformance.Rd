@@ -2,27 +2,19 @@
 \alias{cleanupCrash}
 \alias{createPerformance}
 \alias{finishPerformance}
-\alias{performScore}
+\alias{performScoreRealTime}
 \title{Perform score statements with specified Csound orchestra}
 \usage{
-  createPerformance(orcfile, scorefile = NULL, i = NULL, f
-  = NULL, flags = c("-odac", "-g"), finishPerformance =
-  TRUE)
+  createPerformance(i = NULL, f = NULL, orcfile, scorefile
+  = NULL, out = "dac", realTime = (out == "dac"),
+  finishPerformance = TRUE, suppressDisplays = TRUE,
+  moreflags = NULL)
 
-  performScore(csInstance, i = NULL, f = NULL)
+  performScoreRealTime(csInstance, i = NULL, f = NULL)
 
   finishPerformance(csInstance)
 }
 \arguments{
-  \item{orcfile}{The path of the orchestra file to be used
-  for the performance}
-
-  \item{scorefile}{The path of the score file, if any, to
-  be used for the performance. The whole purpose of this
-  function is to feed the score statements to Csound and
-  bypass the need for score files, but this option is
-  provided in any case.}
-
   \item{i}{A list of \code{matrix} objects. Each
   \code{matrix} is the instructions for a single
   instrument. Each row of the \code{matrix} is an \code{i}
@@ -36,12 +28,24 @@
   function tables Csound uses for oscillators and various
   other uses.}
 
-  \item{flags}{A character vector of extra command-line
-  flags to pass to Csound upon compilation of the
-  orchestra. See
-  \href{http://www.csounds.com/manual/html/CommandFlagsCategory.html}{The
-  Csound Manual's page on the Csound command-line
-  options}.}
+  \item{orcfile}{The path of the orchestra file to be used
+  for the performance}
+
+  \item{scorefile}{The path of the score file, if any, to
+  be used for the performance. The whole purpose of this
+  function is to feed the score statements to Csound and
+  bypass the need for score files, but this option is
+  provided in any case.}
+
+  \item{out}{String representing where to send output
+  sound; the default, \code{"dac"}, indicates to send it
+  your computer's sound output. If you want to render a
+  file, enter the path to the (WAV) file you want.}
+
+  \item{realTime}{Indicates whether the performance is to
+  be rendered in real time. If you are rendering to a file,
+  you probably want this as \code{FALSE}, since it can
+  render a whole lot faster than real-time to file.}
 
   \item{finishPerformance}{Should the performance be closed
   after completing the score? If \preformatted{TRUE}, the
@@ -49,6 +53,16 @@
   \preformatted{FALSE}, returns a pointer to a Csound
   instance that can be used to continue the performance or
   eventually close it.}
+
+  \item{suppressDisplays}{Csound by default pops up with
+  annoying widgets. This alloys you to suppress them.}
+
+  \item{moreflags}{A character vector of extra command-line
+  flags to pass to Csound upon compilation of the
+  orchestra. See
+  \href{http://www.csounds.com/manual/html/CommandFlagsCategory.html}{The
+  Csound Manual's page on the Csound command-line
+  options}.}
 
   \item{csInstance}{An instance of Csound that can be used
   to continue or close the current performance.}
@@ -69,9 +83,9 @@
   If left open, one can use the object returned by
   \code{createPerformance()} to control Csound and
   subsequently add more control data which Csound then
-  performs immediately with \code{performScore()}. You can
-  then finish up the performance and close Csound with
-  \code{finishPerformance()}.
+  performs immediately with \code{performScoreRealTime()}.
+  You can then finish up the performance and close Csound
+  with \code{finishPerformance()}.
 
   If you encounter an error and cannot run
   \code{finishPerformance()} run \code{cleanupCrash} before
