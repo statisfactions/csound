@@ -32,3 +32,4 @@ Collate:
     'getHeaderInfo.R'
     'PerformanceAPI.R'
     'createPerformance.R'
+    'writeCsoundScore.R'

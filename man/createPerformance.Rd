@@ -23,12 +23,14 @@
   bypass the need for score files, but this option is
   provided in any case.}
 
-  \item{i}{A list of matrices containing the
-  \preformatted{i} statements, one for each instrument
-  included. Each \preformatted{i} statement makes an
-  instrument active at a specific time and for a certain
-  duration. Its p-fields are interpreted in the order of
-  the columns of the \code{data.frame}.}
+  \item{i}{A list of \code{matrix} objects. Each
+  \code{matrix} is the instructions for a single
+  instrument. Each row of the \code{matrix} is an \code{i}
+  statement, which instructs Csound to make an instrument
+  active at a specific time and for a certain duration, and
+  with certain parameters (p-fields). These p-fields are
+  interpreted in the order of the columns of the
+  \code{matrix}.}
 
   \item{f}{A list of numeric vectors; these create the
   function tables Csound uses for oscillators and various
