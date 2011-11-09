@@ -88,6 +88,10 @@
   intermingled with sending score events to the instance
   (\code{.csoundScoreEvent()}.
 
+  Alternatively, you can use \code{.csoundPerform()} which
+  does not return control until the score is complete (so
+  is not suitible for truly real-time performance).
+
   5. After performance completes, use
   \code{.csoundCleanup()} to do exactly that.
 
