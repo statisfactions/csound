@@ -144,8 +144,20 @@
                              type=c('a', 'i', 'q', 'f',  'e'),
                              pfields) {
   type <- match.arg(type)
-
-  #pfieldsFloat <- as.floatraw(pfields)
+  
+  ## Deal with the fact that csound5 can be compiled with both 32-bit
+  ## and 64-bit samples
+  .csoundGetSizeOfMYFLT <- function() {
+    ## Internal utility function to get number of bytes in sample
+    ## (csound5 can be compiled for both 4 bytes or 8 bytes)
+    symptr <- .dynsym(getCsoundLibrary(), "csoundGetSizeOfMYFLT")
+    .dyncall(symptr, ")i")
+  }
+  if(.csoundGetSizeOfMYFLT == 4) {
+    pfields <- as.floatraw(pfields)
+    funcsig <- "*<CSOUND>c*fj)i"
+  } else funcsig <- "*<CSOUND>c*dj)i"
+  
   ## Replace with ASCII character code
   ## (There may be a more logical way to do this)
   typeCharCode <- switch(type,
@@ -154,10 +166,9 @@
                          q = 113L,
                          f = 102L,
                          e = 101L)
-  
 
   symptr <- .dynsym(getCsoundLibrary(), "csoundScoreEvent")
-  result <- .dyncall(symptr, "*<CSOUND>c*dj)i", csInstance,
+  result <- .dyncall(symptr, funcsig, csInstance,
                      typeCharCode, pfields, length(pfields))
                         
   if(result != 0) {
@@ -167,6 +178,7 @@
 }
 
 ##' @export
+##' @rdname PerformanceAPI
 .csoundPerform <- function(csInstance) {
   symptr <- .dynsym(getCsoundLibrary(), "csoundPerform")
   result <- .dyncall(symptr, "*<CSOUND>)i", csInstance)

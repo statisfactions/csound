@@ -23,6 +23,8 @@
 
   .csoundScoreEvent(csInstance, type = c("a", "i", "q",
   "f", "e"), pfields)
+
+  .csoundPerform(csInstance)
 }
 \arguments{
   \item{csInstance}{an instance of Csound created by
