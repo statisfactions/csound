@@ -5,10 +5,10 @@
 \alias{performScoreRealTime}
 \title{Perform score statements with specified Csound orchestra}
 \usage{
-  createPerformance(i = NULL, f = NULL, orcfile, scorefile
-  = NULL, out = "dac", realTime = (out == "dac"),
-  finishPerformance = TRUE, suppressDisplays = TRUE,
-  moreflags = NULL)
+  createPerformance(i = NULL, f = NULL, orcfile =
+  "built-in.orc", scorefile = NULL, out = "dac", realTime =
+  (out == "dac"), finishPerformance = TRUE,
+  suppressDisplays = TRUE, moreflags = NULL)
 
   performScoreRealTime(csInstance, i = NULL, f = NULL)
 
@@ -29,7 +29,10 @@
   other uses.}
 
   \item{orcfile}{The path of the orchestra file to be used
-  for the performance}
+  for the performance. If this equals "built-in.orc", the
+  default, the orchestra included with this package will be
+  used (see \code{\link{scoreMatrices}} for more details of
+  using the built-in instruments.)}
 
   \item{scorefile}{The path of the score file, if any, to
   be used for the performance. The whole purpose of this
@@ -55,7 +58,8 @@
   eventually close it.}
 
   \item{suppressDisplays}{Csound by default pops up with
-  annoying widgets. This alloys you to suppress them.}
+  annoying graphical widgets. This alloys you to suppress
+  them (the default).}
 
   \item{moreflags}{A character vector of extra command-line
   flags to pass to Csound upon compilation of the

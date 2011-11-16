@@ -32,7 +32,10 @@
 ##' @param f A list of numeric vectors; these create the function
 ##' tables Csound uses for oscillators and various other uses.
 ##' @param orcfile The path of the orchestra file to be used for the
-##' performance
+##' performance. If this equals "built-in.orc", the default, the orchestra
+##' included with this package will be used (see
+##' \code{\link{scoreMatrices}} for more details of using the built-in
+##' instruments.) 
 ##' @param scorefile The path of the score file, if any, to be used
 ##' for the performance. The whole purpose of this function is to feed
 ##' the score statements to Csound and bypass the need for score
@@ -51,7 +54,7 @@
 ##' Csound instance that can be used to continue the performance or
 ##' eventually close it.
 ##' @param suppressDisplays Csound by default pops up with annoying
-##' widgets. This alloys you to suppress them.
+##' graphical widgets. This alloys you to suppress them (the default).
 ##' @param moreflags A character vector of extra command-line flags to
 ##' pass to Csound upon compilation of the orchestra. See
 ##' \href{http://www.csounds.com/manual/html/CommandFlagsCategory.html}{The
@@ -59,7 +62,7 @@
 ##' @param csInstance An instance of Csound that can be used to
 ##' continue or close the current performance.
 createPerformance <- function(i = NULL, f = NULL,
-                              orcfile,
+                              orcfile = "built-in.orc",
                               scorefile=NULL,
                               out = "dac",
                               realTime = (out == "dac"),
@@ -72,6 +75,11 @@ createPerformance <- function(i = NULL, f = NULL,
   assign(".lastInstance", csinst, pos=".GlobalEnv")
   .csoundPreCompile(csinst)
 
+  ## Get path of built-in orchestra, if applicable
+  if(orcfile == "built-in.orc")
+    orcfile <- system.file("built-in.orc", package = "csound",
+                           mustWork = TRUE)
+  
   ## Create score file for non-real-time performances
   if(!realTime & is.null(scorefile)) {
     scorefile <- writeCsoundScore(i, f)

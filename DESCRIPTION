@@ -33,3 +33,4 @@ Collate:
     'PerformanceAPI.R'
     'createPerformance.R'
     'writeCsoundScore.R'
+    'scoreMatrices.R'
