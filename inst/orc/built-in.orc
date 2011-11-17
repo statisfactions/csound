@@ -3,7 +3,7 @@ kr = 2000
 nchnls = 2
 0dbfs = 1
 
-gitab ftgen 0, 1, 0, 2048, 10, 1
+gitab ftgen 1, 0, 2048, 10, 1
 
 instr 1
 /* Basic FM synthesis instrument */

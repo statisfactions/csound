@@ -61,22 +61,26 @@
 scoreMatrices <- function(nFM = 0, nsubtractive = 0) {
   if(nFM < 0 | nsubtractive < 0)
     stop("n cannot be negative")
-  
+
+  ## Create list of matrices. The "switch" element just returns NULL
+  ## if nFM or nsubtractive are 0
   out <- list(FM = switch(nFM > 0, matrix(nrow = nFM, ncol = 10)),
               subtractive = switch(nsubtractive > 0,
-                matrix(nrow = nsubtractive, ncol = 9)))
+                     matrix(nrow = nsubtractive, ncol = 9)))
+
+  ## Name non-NULL matrices and remove NULL elements
   if(!is.null(out$FM)) {
     colnames(out$FM) <- c("instr", "start", "dur", "amp",
                            "pan", "attkp", "decayp", "cps",
                            "mod", "indx")
     out$FM[, "instr"] <- 1
-  }
+  } else out$FM <- NULL
   if(!is.null(out$subtractive)) {
     colnames(out$subtractive) <- c("instr", "start", "dur",
                                    "amp", "pan", "attkp",
                                    "decayp", "cntr", "bw")
     out$subtractive[, "instr"] <- 2
-  }
+  } else out$subtractive <- NULL
 
   out
 }

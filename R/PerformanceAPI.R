@@ -153,7 +153,7 @@
     symptr <- .dynsym(getCsoundLibrary(), "csoundGetSizeOfMYFLT")
     .dyncall(symptr, ")i")
   }
-  if(.csoundGetSizeOfMYFLT == 4) {
+  if(.csoundGetSizeOfMYFLT() == 4) {
     pfields <- as.floatraw(pfields)
     funcsig <- "*<CSOUND>c*fj)i"
   } else funcsig <- "*<CSOUND>c*dj)i"

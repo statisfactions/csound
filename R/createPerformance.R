@@ -77,7 +77,7 @@ createPerformance <- function(i = NULL, f = NULL,
 
   ## Get path of built-in orchestra, if applicable
   if(orcfile == "built-in.orc")
-    orcfile <- system.file("built-in.orc", package = "csound",
+    orcfile <- system.file("orc/built-in.orc", package = "csound",
                            mustWork = TRUE)
   
   ## Create score file for non-real-time performances
