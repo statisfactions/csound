@@ -11,8 +11,6 @@ test_that("blank 'csoundlibrary' option returns error from getCsoundLibrary()", 
 })
 
 test_that("setting library by path works", {
-  if(!is.null(options("csoundlibrary"))) {
      path <- attr(getCsoundLibrary(), "path")
      setCsoundLibrary(path)
-   }
 })
