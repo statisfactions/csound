@@ -9,6 +9,8 @@
 \alias{.csoundScoreEvent}
 \title{Low-level Csound API functions}
 \usage{
+  .csoundCreate()
+
   .csoundCompile(csInstance, args)
 
   .csoundCleanup(csInstance)
@@ -21,8 +23,8 @@
 
   .csoundPreCompile(csInstance)
 
-  .csoundScoreEvent(csInstance, type = c("a", "i", "q",
-  "f", "e"), pfields)
+  .csoundScoreEvent(csInstance,
+    type = c("a", "i", "q", "f", "e"), pfields)
 
   .csoundPerform(csInstance)
 }

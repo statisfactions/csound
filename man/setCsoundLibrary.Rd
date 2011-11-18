@@ -5,7 +5,11 @@
 \title{Get and set the Csound shared library for accessing Csound's
 functionality.}
 \usage{
+  getCsoundLibrary()
+
   setCsoundLibrary(path)
+
+  .csoundGetVersion()
 }
 \arguments{
   \item{path}{A character string containing the path to the

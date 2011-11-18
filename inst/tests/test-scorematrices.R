@@ -31,6 +31,3 @@ if(!is.null(getCsoundLibrary()))
     sndcheck$subtractive[, "bw"] <- (5:1)*500
     createPerformance(sndcheck)
   })
-    
-
-    

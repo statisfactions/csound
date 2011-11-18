@@ -5,14 +5,17 @@
 \alias{performScoreRealTime}
 \title{Perform score statements with specified Csound orchestra}
 \usage{
-  createPerformance(i = NULL, f = NULL, orcfile =
-  "built-in.orc", scorefile = NULL, out = "dac", realTime =
-  (out == "dac"), finishPerformance = TRUE,
-  suppressDisplays = TRUE, moreflags = NULL)
+  createPerformance(i = NULL, f = NULL,
+    orcfile = "built-in.orc", scorefile = NULL,
+    out = "dac", realTime = (out == "dac"),
+    finishPerformance = TRUE, suppressDisplays = TRUE,
+    moreflags = NULL)
 
   performScoreRealTime(csInstance, i = NULL, f = NULL)
 
   finishPerformance(csInstance)
+
+  cleanupCrash()
 }
 \arguments{
   \item{i}{A list of \code{matrix} objects. Each
