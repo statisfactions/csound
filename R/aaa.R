@@ -12,7 +12,7 @@
     candidates <- c(candidates,
                     paste(candidates, 5, formatC(40:1, width = 2, flag = "0"), sep = "."),
                     paste(candidates, 5, 9:1, sep = "."))
-    csndlib <- dynfind()
+    csndlib <- dynfind(candidates)
   }
   if(is.null(csndlib)) {
     packageStartupMessage("Note: No valid csound library found automatically. You must have a valid Csound library to use this package; if you know the path to your Csound shared library, you can specify it using setCsoundLibrary.")
