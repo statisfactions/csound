@@ -12,6 +12,7 @@
     candidates <- c(candidates,
                     paste(candidates, 5, formatC(40:1, width = 2, flag = "0"), sep = "."),
                     paste(candidates, 5, 9:1, sep = "."))
+    candidates <- c(candidates, paste(candidates, 9:1, sep = "."))
     csndlib <- dynfind(candidates)
   }
   if(is.null(csndlib)) {
