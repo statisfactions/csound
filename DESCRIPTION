@@ -16,7 +16,7 @@ Description: Provides some basic access in an R session to
     mature on its own, but it certainly can be used without
     knowing anything about playitbyr.
 SystemRequirements: A valid copy of the Csound library must
-    present. Csound can be downloaded from
+    be present. Csound can be downloaded from
     http://www.csounds.com. The library is included in the
     Windows and Mac OS X binaries; binary Linux
     distributions often package the library separately from

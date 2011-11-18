@@ -69,9 +69,11 @@
   zero if it is stopped by another thread.
 }
 \description{
-  Many functions that provide a low-level interface to
-  Csound functionality, often called for their side effects
-  on a running instance of Csound.
+  These functions provide a low-level interface to Csound
+  functionality, and are often called for their side
+  effects on a running instance of Csound.
+  \code{\link{createPerformance}()} is the recommended
+  interface to this functionality, however.
 }
 \details{
   Order is important (see note!). These should be called in
@@ -104,8 +106,8 @@
 }
 \note{
   Using these functions in the wrong order can cause a
-  crash! Other functions in this package provide safer
-  interfaces to Csound, though this is the most direct
-  interaction
+  crash! \code{\link{createPerformance}()} provides a safer
+  interface and is recommended for most users.
 }
+\keyword{internal}
 

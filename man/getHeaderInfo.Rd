@@ -12,8 +12,8 @@
   \code{getHeaderInfo()} returns a list with the following
   elements:
 
-  \code{$sample rate}, abbreviated as \preformatted{sr} in
-  the orchestra header. is the number of data points
+  \code{$sample rate}, abbreviated as \code{sr} in the
+  orchestra header. is the number of data points
   (\sQuote{samples}) per second used to represent a sound.
   The default is 44100 Hz, which is CD-quality.
 
@@ -24,15 +24,14 @@
   for things such as creating an envelope for sounds; using
   a lower-than-audio rate uses less processing power for
   what is often the same audio effect. Higher values of
-  \preformatted{ksmps} indicate a slower control rate;
-  \preformatted{ksmps=1} means audio rate. A typical
-  \preformatted{ksmps} is 10.
+  \code{ksmps} indicate a slower control rate; \code{ksmps
+  = 1} means audio rate. A typical \code{ksmps} is 10.
 
   \code{$x0dbfs} is the maximum amplitude value--specified
   amplitude values are scaled between 0 and this number.
-  \preformatted{0dbfs} is short for Zero Decibels at
-  Full-Scale Amplitude. A common value is 1; if not
-  specified in the file, the default is 32768.
+  \code{0dbfs} is short for Zero Decibels at Full-Scale
+  Amplitude. A common value is 1; if not specified in the
+  file, the default is 32768.
 
   \code{$nchnls} is the number of output channels
   specified; 1 is mono output, 2 stereo, etc.

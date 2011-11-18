@@ -1,8 +1,9 @@
 ##' Low-level Csound API functions
 ##'
-##' Many functions that provide a low-level interface to Csound
-##' functionality, often called for their side effects on a running
-##' instance of Csound.
+##' These functions provide a low-level interface to Csound
+##' functionality, and are often called for their side effects on a
+##' running instance of Csound. \code{\link{createPerformance}()} is
+##' the recommended interface to this functionality, however.
 ##'
 ##' Order is important (see note!). These should be called in roughly
 ##' the following order.
@@ -31,8 +32,8 @@
 ##' \code{.csoundDestroy()}.
 ##' 
 ##' @note Using these functions in the wrong order can cause a crash!
-##' Other functions in this package provide safer interfaces to
-##' Csound, though this is the most direct interaction
+##' \code{\link{createPerformance}()} provides a safer interface and
+##' is recommended for most users.
 ##' 
 ##' @rdname PerformanceAPI
 ##'
@@ -43,7 +44,10 @@
 ##' if it reaches the end of the score, or zero if it is stopped by
 ##' another thread.
 ##' 
-##' @param csInstance an instance of Csound created by \code{.csoundCreate}
+##' @param csInstance an instance of Csound created by
+##' \code{.csoundCreate}
+##'
+##' @keywords internal
 ##' @export
 .csoundCreate <- function() {
   symptr <- .dynsym(getCsoundLibrary(), "csoundCreate")

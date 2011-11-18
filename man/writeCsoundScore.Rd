@@ -29,6 +29,6 @@
   Sometimes you want to write data to a Csound score file,
   either for rendering later or for when you want to render
   to a sound file. This is principally intended to be
-  called by createPerformance.
+  called by \code{\link{createPerformance}}.
 }
 
