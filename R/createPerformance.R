@@ -99,10 +99,10 @@ createPerformance <- function(i = NULL, f = NULL,
   .csoundPreCompile(csinst)
 
   ## Get path of built-in orchestra, if applicable
-  if(orcfile == "built-in.orc")
-    orcfile <- system.file("orc/built-in.orc", package = "csound",
-                           mustWork = TRUE)
-  
+  if(orcfile == "built-in.orc") {
+    orcfile <- system.file("orc/built-in.orc", package = "csound")
+    if(orcfile == "") stop("Unable to find built-in orchestra file.")
+  }
   ## Create score file for non-real-time performances
   if(!realTime & is.null(scorefile)) {
     scorefile <- writeCsoundScore(i, f)
