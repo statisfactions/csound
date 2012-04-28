@@ -12,7 +12,7 @@ Description: Provides basic access in an R session to
     Csound (http://www.csounds.com), a powerful free and
     open-source software sound synthesizer. The package
     functionality is largely geared towards supporting the
-    needs of the playitbyr package for sonification and is 
+    needs of the playitbyr package for sonification and is
     not particularly mature on its own. But it certainly
     can be used without knowing anything about playitbyr.
 SystemRequirements: A valid copy of the Csound library must

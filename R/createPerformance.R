@@ -24,7 +24,7 @@
 ##' 
 ##' @export
 ##' @rdname createPerformance
-##' % Parameter list exported to sonopts.R on Friday, December 16, 2011
+## Parameter list exported to sonopts.R on Friday, December 16, 2011
 ##' @param i A list of \code{matrix} objects. Each \code{matrix} is
 ##' the instructions for a single instrument. Each row of the
 ##' \code{matrix} is an \code{i} statement, which instructs Csound to
@@ -89,7 +89,7 @@ createPerformance <- function(i = NULL, f = NULL,
                               orcfile = "built-in.orc",
                               scorefile=NULL,
                               out = "dac",
-                              realTime = (out == "dac"),
+                              realTime = FALSE,
                               finishPerformance = TRUE,
                               suppressDisplays = TRUE,
                               moreflags = NULL) {

@@ -7,7 +7,7 @@
 \usage{
   createPerformance(i = NULL, f = NULL,
     orcfile = "built-in.orc", scorefile = NULL,
-    out = "dac", realTime = (out == "dac"),
+    out = "dac", realTime = FALSE,
     finishPerformance = TRUE, suppressDisplays = TRUE,
     moreflags = NULL)
 
