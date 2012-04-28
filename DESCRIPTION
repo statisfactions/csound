@@ -1,7 +1,7 @@
 Package: csound
 Type: Package
 Title: Accessing Csound functionality through R
-Version: 0.1-0
+Version: 0.1-1
 Date: 2011-12-18
 Author: Ethan Brown
 Maintainer: Ethan Brown <ethancbrown@gmail.com>
