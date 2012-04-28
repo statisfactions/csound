@@ -48,13 +48,14 @@ setCsoundLibrary <- function(path) {
     cat("Shared object successfully found. Testing if it is Csound by\n",
         "checking version number...\n\n")
     versymbol <- .dynsym(csndlib, "csoundGetVersion")
+    options(csoundlibrary=csndlib)
+
     if(is.null(versymbol))
       stop("'", path, "' is detected as a shared library, but it\n",
            "is not the correct one for Csound--the attempt to access function\n",
            "csoundGetVersion() from the library failed.")
     ver <- .csoundGetVersion()
 
-    options(csoundlibrary=csndlib)
     cat(paste("Successfully set option for Csound", ver, "\n"))
     
   }
