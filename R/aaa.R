@@ -10,9 +10,11 @@
                     "csound64.dll",
                     "csound.dll")
     candidates <- c(candidates,
-                    paste(candidates, 5, formatC(40:1, width = 2, flag = "0"), sep = "."),
-                    paste(candidates, 5, 9:1, sep = "."))
-    candidates <- setdiff(c(candidates, paste(candidates, 9:1, sep = ".")), c("csnd", "csound", "csound.dll"))
+                    unlist(sapply(candidates, function(x)
+                                  paste(x, 5, formatC(40:1, width = 2, flag = "0"), sep = "."))),
+                    unlist(sapply(candidates, function(x)
+                                  paste(x, 5, 9:1, sep = "."))))
+    candidates <- setdiff(candidates, c("csnd", "csound", "csound.dll"))
     csndlib <- dynfind(candidates)
   }
   if(is.null(csndlib)) {
