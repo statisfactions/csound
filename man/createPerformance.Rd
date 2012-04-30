@@ -101,7 +101,6 @@
   and crash R.
 }
 \examples{
-\dontrun{
 sndcheck <- scoreMatrices(5, 5)
 sndcheck$FM[, "start"] <- 0:4
 sndcheck$FM[, "dur"] <- 0.5
@@ -118,7 +117,7 @@ sndcheck$subtractive[, "pan"] <- (4:0)/4
 sndcheck$subtractive[, c("attkp", "decayp")] <- 0.01
 sndcheck$subtractive[, "cntr"] <- (5:1)*500
 sndcheck$subtractive[, "bw"] <- (5:1)*500
-createPerformance(sndcheck)}
+\dontrun{createPerformance(sndcheck)}
 }
 \seealso{
   \code{\link{scoreMatrices}()} for easy creation of the
