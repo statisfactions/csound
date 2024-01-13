@@ -22,7 +22,7 @@
       pathlist <- dir(path)
       matches <- pathlist %in% candidatesfiltered
       if(any(matches))
-        csndlib <- .dynload(dir(path, full.names = T)[which(matches)[1]])
+        csndlib <- dynload(dir(path, full.names = T)[which(matches)[1]])
     }
     if(is.null(csndlib) && file.exists("/Library/Frameworks/CsoundLib64.framework/Versions/Current/lib_csound.dylib"))
       csndlib <- "/Library/Frameworks/CsoundLib64.framework/Versions/Current/lib_csound.dylib" ## in case we can make it work on OSX...

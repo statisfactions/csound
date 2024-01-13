@@ -50,7 +50,7 @@
 ##' @keywords internal
 ##' @export
 .csoundCreate <- function() {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundCreate")
+  symptr <- dynsym(getCsoundLibrary(), "csoundCreate")
   return(.dyncall(symptr,")*<CSOUND>"))
 }
 
@@ -65,7 +65,7 @@
   args <- c("csound", args) # 'csound' the first argument that
                             # .csoundCompile expects and is ignored.
   ptrargs <- strarrayptr(args)
-  symptr <- .dynsym(getCsoundLibrary(), "csoundCompile")
+  symptr <- dynsym(getCsoundLibrary(), "csoundCompile")
   result <- .dyncall(symptr,"*<CSOUND>iZ)i",
                      csInstance, length(args), ptrargs)
     if(result != 0) {
@@ -77,7 +77,7 @@
 ##' 
 ##' @export
 .csoundCleanup <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundCleanup")
+  symptr <- dynsym(getCsoundLibrary(), "csoundCleanup")
   result <- .dyncall(symptr,"*<CSOUND>)i", csInstance)
 
   if(result != 0) {
@@ -89,7 +89,7 @@
 ##' @export
 ##' 
 .csoundDestroy <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundDestroy")
+  symptr <- dynsym(getCsoundLibrary(), "csoundDestroy")
   .dyncall(symptr,"*<CSOUND>)v", csInstance)
   invisible(NULL)
 }
@@ -99,7 +99,7 @@
 ##' @export
 ##' @rdname PerformanceAPI
 .csoundPerform <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundPerform")
+  symptr <- dynsym(getCsoundLibrary(), "csoundPerform")
   result <- .dyncall(symptr, "*<CSOUND>)i", csInstance)
   if(result<0) stop("Error during performance")
   return(result)
@@ -108,7 +108,7 @@
 ##' @export
 ##' @rdname PerformanceAPI
 .csoundPerformKsmps <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundPerformKsmps")
+  symptr <- dynsym(getCsoundLibrary(), "csoundPerformKsmps")
   finished <- .dyncall(symptr, "*<CSOUND>)i", csInstance)
   return(finished) # logical indicating whether score is complete or
                    # not.
@@ -117,7 +117,7 @@
 ##' @export
 ##' @rdname PerformanceAPI
 .csoundPreCompile <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundPreCompile")
+  symptr <- dynsym(getCsoundLibrary(), "csoundPreCompile")
   .dyncall(symptr, "*<CSOUND>)v", csInstance)
   invisible(NULL)
 }
@@ -154,7 +154,7 @@
   .csoundGetSizeOfMYFLT <- function() {
     ## Internal utility function to get number of bytes in sample
     ## (csound5 can be compiled for both 4 bytes or 8 bytes)
-    symptr <- .dynsym(getCsoundLibrary(), "csoundGetSizeOfMYFLT")
+    symptr <- dynsym(getCsoundLibrary(), "csoundGetSizeOfMYFLT")
     .dyncall(symptr, ")i")
   }
   if(.csoundGetSizeOfMYFLT() == 4) {
@@ -171,7 +171,7 @@
                          f = 102L,
                          e = 101L)
 
-  symptr <- .dynsym(getCsoundLibrary(), "csoundScoreEvent")
+  symptr <- dynsym(getCsoundLibrary(), "csoundScoreEvent")
   result <- .dyncall(symptr, funcsig, csInstance,
                      typeCharCode, pfields, length(pfields))
                         
@@ -184,7 +184,7 @@
 ##' @export
 ##' @rdname PerformanceAPI
 .csoundPerform <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundPerform")
+  symptr <- dynsym(getCsoundLibrary(), "csoundPerform")
   result <- .dyncall(symptr, "*<CSOUND>)i", csInstance)
   if(result < 0) {
     stop(getCsoundError(result))

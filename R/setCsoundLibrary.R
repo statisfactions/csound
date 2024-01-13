@@ -41,13 +41,13 @@ getCsoundLibrary <- function() {
 ##' @param path A character string containing the path to the Csound
 ##' shared library.
 setCsoundLibrary <- function(path) {
-  csndlib <- .dynload(path)
+  csndlib <- dynload(path)
   if(is.null(csndlib)) {
     stop("No valid shared object found at '", path, "'.")
   } else {
     cat("Shared object successfully found. Testing if it is Csound by\n",
         "checking version number...\n\n")
-    versymbol <- .dynsym(csndlib, "csoundGetVersion")
+    versymbol <- dynsym(csndlib, "csoundGetVersion")
     options(csoundlibrary=csndlib)
 
     if(is.null(versymbol))
@@ -65,7 +65,7 @@ setCsoundLibrary <- function(path) {
 ##' 
 ##' @export
 .csoundGetVersion <- function() {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetVersion")
+  symptr <- dynsym(getCsoundLibrary(), "csoundGetVersion")
   ## Version number appears in 1000s, so divide
- return(.dyncall(symptr, ")i")/1000)
+ return(dyncall(symptr, ")i")/1000)
 }

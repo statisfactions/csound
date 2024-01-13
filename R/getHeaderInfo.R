@@ -49,33 +49,33 @@ getHeaderInfo <- function(csInstance) {
        
 
 .csoundGetKr <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetKr")
+  symptr <- dynsym(getCsoundLibrary(), "csoundGetKr")
   return(.dyncall(symptr, "*<CSOUND>)f", csInstance))
 }
 
 .csoundGetKsmps <- function(csInstance) {
- symptr <- .dynsym(getCsoundLibrary(), "csoundGetKsmps")
+ symptr <- dynsym(getCsoundLibrary(), "csoundGetKsmps")
  return(.dyncall(symptr, "*<CSOUND>)i", csInstance))
 }
 
 
 .csoundGetSr <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetSr")
+  symptr <- dynsym(getCsoundLibrary(), "csoundGetSr")
   return(.dyncall(symptr, "*<CSOUND>)f", csInstance))
 }
 
 
 .csoundGetSampleSize <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetSampleSize")
+  symptr <- dynsym(getCsoundLibrary(), "csoundGetSampleSize")
   return(.dyncall(symptr, "*<CSOUND>)i", csInstance))
 }
 
 .csoundGetNchnls <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGetNchnls")
+  symptr <- dynsym(getCsoundLibrary(), "csoundGetNchnls")
   return(.dyncall(symptr, "*<CSOUND>)i", csInstance))
 }
 
 .csoundGet0dBFS <- function(csInstance) {
-  symptr <- .dynsym(getCsoundLibrary(), "csoundGet0dBFS")
+  symptr <- dynsym(getCsoundLibrary(), "csoundGet0dBFS")
   return(.dyncall(symptr, "*<CSOUND>)f", csInstance))
 }
