@@ -97,7 +97,6 @@ createPerformance <- function(i = NULL, f = NULL,
   flags <- c(paste("-o", out, sep = ""), "-d"[suppressDisplays], moreflags)
   csinst <- .csoundCreate()
   assign(".lastInstance", csinst, pos=".GlobalEnv")
-  .csoundPreCompile(csinst)
 
   ## Get path of built-in orchestra, if applicable
   if(orcfile == "built-in.orc") {
